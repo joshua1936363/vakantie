@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import json
 import streamlit as st
 
+app.run(port=5001)
 app = Flask(__name__)
 
 def load_vragen():
