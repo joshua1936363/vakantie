@@ -3,8 +3,8 @@ from flask import Flask, render_template, request, redirect, url_for
 import json
 import streamlit as st
 
-app.run(port=5001)
 app = Flask(__name__)
+app.run(port=5001)
 
 def load_vragen():
     if os.path.exists('vragen.json'):
