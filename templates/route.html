@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Route</title>
+    <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Routebeschrijving</h1>
+    <p>Hier komt je routebeschrijving te staan.</p>
+    <div class="dropdown">
+        <button class="dropbtn">Navigatie</button>
+        <div class="dropdown-content">
+            <a href="/">Home</a>
+            <a href="/vragen">Vragen</a>
+            <a href="/route">Route</a>
+        </div>
+    </div>
+</body>
+</html>
