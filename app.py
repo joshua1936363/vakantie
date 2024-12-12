@@ -4,7 +4,7 @@ import json
 import streamlit as st
 
 app = Flask(__name__)
-app.run(port=5001)
+app.run(port=5234)
 
 def load_vragen():
     if os.path.exists('vragen.json'):
