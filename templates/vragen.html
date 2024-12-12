@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Vragen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, #1e6a2b, #95dda4);
+        }
+
+
+        @keyframes gradient {
+            0% {
+                background-color: #ff7e5f;
+            }
+            50% {
+                background-color: #ea6800;
+            }
+            100% {
+                background-color: #ff7e5f;
+            }
+        }
+
+        .dropdown {
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .vragenlijst {
+            margin-top: 70px;
+        }
+
+        .vraag {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+
+        .reacties {
+            margin-left: 20px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .reactie {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+
+        .verwijder-knop {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .verwijder-knop:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="dropdown">
+            <button class="dropbtn">Navigatie</button>
+            <div class="dropdown-content">
+                <a href="/">Home</a>
+                <a href="/vragen">Vragen</a>
+                <a href="/route">Route</a>
+            </div>
+        </div>
+    </div>
+    <h1>Stel je vraag</h1>
+    <form method="POST" enctype="multipart/form-data">
+
+        <label for="naam">naam:</label>
+        <textarea id="naam" name="naam" rows="1" cols="10" required></textarea>
+        <br>
+         <label for="vraag">Vraag:</label>
+        <textarea id="vraag" name="vraag" rows="4" cols="50" required></textarea>
+        <br>
+        <label for="foto">Upload een foto:</label>
+        <input type="file" id="foto" name="foto" accept="image/*">
+        <br>
+        <button type="submit">Verstuur</button>
+    </form>
+    <div class="vragenlijst">
+        {% for index, vraag in enumerate(vragen) %}
+            <div class="vraag">
+                <p>{{ vraag.vraag }}</p>
+                {% if vraag.foto %}
+                <img src="{{ url_for('static', filename=vraag.foto) }}" alt="Foto" style="max-width: 200px;">
+                {% endif %}
+                <form method="POST" action="{{ url_for('verwijder_vraag', vraag_id=index) }}">
+                    <button class="verwijder-knop" type="submit">Verwijder Vraag</button>
+                </form>
+                <h3>Reacties:</h3>
+                <div class="reacties">
+                    {% for reactie_id, reactie in enumerate(vraag.reacties) %}
+                        <div class="reactie">
+                            <p>{{ reactie }}</p>
+                            <form method="POST" action="{{ url_for('verwijder_reactie', vraag_id=index, reactie_id=reactie_id) }}">
+                                <button class="verwijder-knop" type="submit">Verwijder Reactie</button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                    <form method="POST" action="{{ url_for('reactie', vraag_id=index) }}">
+                        <label for="reactie">Reactie:</label>
+                        <textarea id="reactie" name="reactie" rows="2" cols="50" required></textarea>
+                        <br>
+                        <button type="submit">Reageer</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
