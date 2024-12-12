@@ -1,10 +1,8 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for
 import json
-import streamlit as st
 
-app = Flask(__name__)if __name__ == '__main__': app.run(port=0)
-
+app = Flask(__name__)
 
 def load_vragen():
     if os.path.exists('vragen.json'):
@@ -57,8 +55,5 @@ def verwijder_reactie(vraag_id, reactie_id):
 def route():
     return render_template('route.html')
 
-def run_flask():
-    app.run()
-
 if __name__ == '__main__':
-    run_flask()
+    app.run(port=0)
