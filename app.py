@@ -3,8 +3,9 @@ from flask import Flask, render_template, request, redirect, url_for
 import json
 import streamlit as st
 
-app = Flask(__name__)
-if __name__ == '__main__': app.run(port=8000)
+app = Flask(__name__)if __name__ == '__main__':
+    app.run(port=0)
+
 
 def load_vragen():
     if os.path.exists('vragen.json'):
