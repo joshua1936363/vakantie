@@ -56,4 +56,7 @@ def route():
     return render_template('route.html')
 
 if __name__ == '__main__':
-    app.run(port=0)
+    try:
+        app.run(port=0)
+    except Exception as e:
+        print(f"Error starting Flask app: {e}")
